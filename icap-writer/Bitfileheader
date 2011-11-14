@@ -1,0 +1,101 @@
+05/23/2001
+
+Bit file header specification
+
+
+A bit file has two sections.  The first section is a variable length header. 
+The second section is a fixed-length bitstream which is downloaded into the
+FPGA.  The format of the bitstream can be found in the data book for the
+appropriate FPGA, but the format of the header is not anywhere that I have
+found in the Xilinx literature.  This document describes the structure the
+bit file header for the XC4005XL and XC4005E FPGAs.  This structure may or
+may not be appropriate for headers of bit files for other Xilinx FPGAs.
+
+Preamble: unknown values
+
+The bit files generated with xmake for the XC4005XL and XC4005E FPGAs all
+begin with the following sequence of 13 bytes (shown here in hexadecimal): 
+00 09 0F F0 0F F0 0F F0 0F F0 00 00 01
+
+Part "a": source file
+
+Parts a through e follow the same general format.  First the part begins
+with the ASCII letter of the section followed by a NULL (00h).  For example,
+part c begins with hexadecimal 63 00, since 63 is ASCII for "c".  The next
+byte is a length byte, giving the length of the string to follow plus 1. 
+The length is followed by an ASCII string, and that string is followed by a
+NULL (00h).  If there is no string at all in the section, then the length
+byte is 0 and there is no NULL termination.
+
+Part a of the header tells the filename used to generate the bit file.  For
+example, if the file "xc4005.ncd" was used to generate the bit file then the
+header will be:
+"a" 00 0B "xc4005.ncd" 00
+
+Convert the quoted letters into their ASCII representation.
+
+Part "b": part name
+
+Part b follows the same format as part a.  The string identifies the part
+and package of the target device.  In my limited tests this string has
+always been "4005xlpc84" or "4005epc84".
+
+Part "c": date
+
+Part c follows the same format as part a.  The string gives the date the bit
+file was generated, for example "2001/03/12".
+
+Part "d": time
+
+Part d follows the same format as part a.  The string gives the time the bit
+file was generated, for example "20:43:04".
+
+Part "e": unknown
+
+Part e seems to follow the same format as part a.  However, in my tests this
+part has always been empty.  In other words, the entire part is hexadecimal
+65 00 00.
+
+Final part: bitstream length
+
+The final part of the header gives the length of the bitstream to follow, in
+binary.  This is two bytes long for the XC4005XL and XC4005E parts, but it
+is probable that this length will be more than two bytes long for larger
+Xilinx parts.
+
+For example, the XC4005XL part has a 18995 byte long bitstream.  The final
+two bytes of the header are hexadecimal 4A33, which is 18995 when converted
+to decimal.
+
+Immediately following the final part of the header, the bitstream begins. 
+The file ends immediately after the bitstream.
+
+
+05/24/2001
+UPDATE:
+
+I examined the bit file headers for two more Xilinx parts, a Spartan part
+and 1000 gate Virtex part.  From this I determined my understanding of the
+sections was a little off.  The section letters FOLLOW the sections.  So the
+unknown garbage at the beginning (which was the same for all parts) is
+section a, the part name was section b, and so on.  The time was section e,
+and the 00 following the 65 00 was the beginning of the length.  So the
+length is actually three bytes long.  This gives a maximum bitstream length
+of FFFFFFh, or 16,777,215 bytes.
+
+09/10/2002
+UPDATE:
+
+I got an email message from "Stephen from Australia" who set me straight on
+the format of the bit file header.  He pointed me to the online FPGA FAQ,
+which gives an alternative view of how the header is laid out.  Each section
+letter is a single byte.  The 00 which follows the section letter is
+actually the first byte of a two-byte size.  The final four bytes of the
+header make up a four-byte size.  After considering the difference between
+the two specifications, I realized that even if the FAQ is wrong it wouldn't
+hurt to parse it that way since the first byte of the length would always be
+00.  And it seems more aesthetically pleasing to have a four-byte bitstream
+length than a three-byte bitstream length.  I have altered bitfile.c to
+reflect the change in my understanding of the format.
+
+Thanks for setting me straight, Steve!

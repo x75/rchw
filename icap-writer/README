@@ -1,0 +1,15 @@
+
+Write a partial Xilinx bitfile onto the ICAP device
+
+This is a modification of bitinfo by Dave Sullins. See
+ - http://home.earthlink.net/~davesullins/software/bitinfo.html
+ - and README.bitinfo
+
+Modified version to strip the header off the bitstream and pipe
+the remaining data into /dev/icap0
+
+Requirements:
+ - Linux on a Xilinx FPGA with ICAP capabilities (Virtex2,4,5,.., possibly Spartan 6).
+ - Linux Kernel mods for ICAP driver by Nicholas Palladino, http://fpgawiki.ce.rit.edu/index.php/Main_Page
+
+Oswald Berthold, 20101214

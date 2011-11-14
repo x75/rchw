@@ -1,0 +1,44 @@
+ Bitinfo - Parse a Xilinx bit-file header
+
+
+ Description
+ 
+  Bitinfo is a simple utility that parses the header of a Xilinx bit file
+  and outputs all the information that can be obtained from that header. 
+  This information includes the Xilinx FPGA the bit file was created for,
+  the NCD file the bit file was created from, the creation date and time,
+  and the bitstream length.
+ 
+  I had to reverse-engineer the file format to figure out how to parse all
+  of this information.  So that someone else doesn't have to repeat my work,
+  I have included my reverse-engineering notes with the source code.
+ 
+  You may find this program useful if, like me, you often end up with
+  several bit files lying around, all called "xc4005.bit," and you can't
+  remember which one is the one you need.  The header should at least give
+  you some clues about the file's contents.  Another use for this program is
+  to prove to a student that the bit file they have brought to lab with them
+  is not the one from this week's experiment, since the timestamp is from
+  three weeks ago.
+ 
+
+ Compiling and using bitinfo
+ 
+  You can download the bitinfo source for free from
+  http://members.naspa.net/djs/software/bitinfo.tar.gz.  It is released under
+  the GNU Public License.  See the COPYING file for more details.
+ 
+  To compile bitinfo, first edit the Makefile if necessary.  If you don't
+  have gcc installed, you will need to change the first line from "CC=gcc"
+  to "CC=cc" or whatever your C compiler is called.  After editing the
+  Makefile, type "make" and you're done.  Although bitinfo was written for
+  Unix, it has also been successfully compiled for Windows NT 4.0 using MS
+  Visual C++.
+ 
+  To run bitinfo, just type "bitinfo < file.bit".  You will probably want to
+  put bitinfo in some bin directory for convenience.
+ 
+ 
+ Bugs
+ 
+  Please report any bugs by emailing me at djs@naspa.net.

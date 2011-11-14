@@ -1,0 +1,12 @@
+2011-11-14, version icap-write, stripheader
+
+Modified original bitinfo to
+ - read bitstream, strip off the header and write raw bitstream onto /dev/icap
+ - read bitstream, strip off the header and write back to stdout
+
+2002-09-10, version 0.2
+
+Updated the way I parse the bitstream length according to information in the
+online FPGA FAQ.  Special thanks to "Stephen from Australia" for setting me
+straight.  Started using version numbers.  If you have an unnumbered
+version of bitinfo, it is version 0.1 and out of date.
