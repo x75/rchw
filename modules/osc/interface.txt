@@ -1,0 +1,3 @@
+in: clk std_logic
+in: enable std_logic
+out: osc signal std_logic
