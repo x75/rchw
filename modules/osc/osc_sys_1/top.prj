@@ -1,0 +1,3 @@
+vhdl work "eval_pulse_count.vhd"
+vhdl work "../osc_freqency_divider_2/frequency_divider_2.vhd"
+vhdl work "top.vhd"

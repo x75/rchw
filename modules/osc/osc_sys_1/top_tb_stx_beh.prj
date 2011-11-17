@@ -1,0 +1,4 @@
+vhdl isim_temp "frequency_divider_1.vhd"
+vhdl isim_temp "eval_pulse_count.vhd"
+vhdl isim_temp "top.vhd"
+vhdl isim_temp "top_tb.vhd"

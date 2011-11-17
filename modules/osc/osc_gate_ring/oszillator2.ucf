@@ -1,0 +1,3 @@
+NET "i_en" LOC = U8;
+NET "clk" LOC = AH15;
+NET "o_osz" LOC = E8;
