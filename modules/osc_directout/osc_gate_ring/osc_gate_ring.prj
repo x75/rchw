@@ -1,0 +1,3 @@
+vhdl work "inverter.vhd"
+vhdl work "delayline.vhd"
+vhdl work "osc_gate_ring.vhd"

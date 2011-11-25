@@ -1,1 +1,3 @@
+vhdl work "osc_directout_wrapper.vhd"
 vhdl work "osc_freqdiv_1.vhd"
+vhdl work "osc_freqdiv_1_wrapper.vhd"
