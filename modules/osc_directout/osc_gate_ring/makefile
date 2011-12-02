@@ -8,7 +8,7 @@ TRCE := trce
 XDL := xdl
 BITGEN := bitgen
 
-target = oszillator2
+target = osc_gate_ring
 
 DEVICE := xc5vfx70tff1136-1
 

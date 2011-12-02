@@ -1,17 +1,17 @@
 set -tmpdir "xst/projnav.tmp"
 set -xsthdpdir "xst"
 run
--ifn osc_gate_ring.prj
+-ifn bitwise_delay_2.prj
 -ifmt mixed
--ofn osc_gate_ring
+-ofn bitwise_delay_2
 -ofmt NGC
 -p xc5vfx70tff1136-1
--top osc_gate_ring
+-top bitwise_delay_2
 -opt_mode Speed
 -opt_level 1
 -power NO
 -iuc NO
--lso osc_gate_ring.lso
+-lso bitwise_delay_2.lso
 -keep_hierarchy NO
 -netlist_hierarchy as_optimized
 -rtlview Yes

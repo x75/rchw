@@ -40,19 +40,20 @@ begin
       sgnl         => delayline_input,
       delayed_sgnl => delayline_output);
 
-  process (clk)
-  begin
-    --wait until clk'event and clk = '1';
-    if clk'event and clk = '1' then
-      if triggered = '0' then
-        o_trig_rcnf <= '1';
-        triggered <= '1';               -- disable retrigger forever
-      else
-        o_trig_rcnf <= '0';
-      end if;
-    end if;
-    -- clock B tick whenever d(24) is zero
-  end process;
+  --process (clk)
+  --begin
+  --  --wait until clk'event and clk = '1';
+  --  if clk'event and clk = '1' then
+  --    if triggered = '0' then
+  --      o_trig_rcnf <= '1';
+  --      triggered <= '1';               -- disable retrigger forever
+  --    else
+  --      o_trig_rcnf <= '0';
+  --    end if;
+  --  end if;
+  --  -- clock B tick whenever d(24) is zero
+  --end process;
+  o_trig_rcnf <= '0';
   
   delayline_input <= delayline_output and i_en;
   --delayline_output <= delayed_sgnl;

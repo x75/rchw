@@ -8,7 +8,7 @@ TRCE := trce
 XDL := xdl
 BITGEN := bitgen
 
-target = oszillator2
+target = bitwise_delay_2
 
 DEVICE := xc5vfx70tff1136-1
 

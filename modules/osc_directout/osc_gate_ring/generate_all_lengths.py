@@ -1,15 +1,16 @@
+#!/usr/bin/env python
 # generate oszillator2 module with line-lengths from 2 - 78
 
 import sys, os
 from string import Template
 from shutil import copyfile
 
-target = "oszillator2"
+target = "osc_gate_ring"
 vhdtmpl = "%s.vhtmpl" % target
 substdict = {"linelength": 2}
-target_proj = "../../../reconf_linux_directbit/implementation/"
-module_base = "osc_gate_ring_"
-module_bbname = "osc_wrapped.ngc"
+target_proj = "../../../../DPR/experiments/reconf_linux_directbit/implementation/"
+module_base = "osc_directout_gate_ring_"
+module_bbname = "osc_directout_wrapped.ngc"
 
 # linelengths are multiple of two
 for linelength in range(2,80,2):

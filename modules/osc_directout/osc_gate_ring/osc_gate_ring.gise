@@ -41,6 +41,7 @@
   <transforms xmlns="http://www.xilinx.com/XMLSchema">
     <transform xil_pn:end_ts="1322216541" xil_pn:name="TRAN_copyInitialToXSTAbstractSynthesis" xil_pn:start_ts="1322216541">
       <status xil_pn:value="SuccessfullyRun"/>
+      <status xil_pn:value="ReadyToRun"/>
     </transform>
     <transform xil_pn:end_ts="1322216541" xil_pn:name="TRAN_schematicsToHdl" xil_pn:prop_ck="-3440798474653923483" xil_pn:start_ts="1322216541">
       <status xil_pn:value="SuccessfullyRun"/>
@@ -66,12 +67,16 @@
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
     </transform>
-    <transform xil_pn:end_ts="1322216646" xil_pn:in_ck="8535718080118165962" xil_pn:name="TRANEXT_xstsynthesize_virtex5" xil_pn:prop_ck="7017341927636972502" xil_pn:start_ts="1322216635">
+    <transform xil_pn:end_ts="1322221948" xil_pn:in_ck="8535718080118165962" xil_pn:name="TRANEXT_xstsynthesize_virtex5" xil_pn:prop_ck="7017341927636972502" xil_pn:start_ts="1322221937">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="WarningsGenerated"/>
       <status xil_pn:value="ReadyToRun"/>
+      <status xil_pn:value="OutOfDateForInputs"/>
+      <status xil_pn:value="OutOfDateForOutputs"/>
+      <status xil_pn:value="InputChanged"/>
+      <status xil_pn:value="OutputChanged"/>
+      <status xil_pn:value="OutputRemoved"/>
       <outfile xil_pn:name="_xmsgs/xst.xmsgs"/>
-      <outfile xil_pn:name="osc_gate_ring.cmd_log"/>
       <outfile xil_pn:name="osc_gate_ring.lso"/>
       <outfile xil_pn:name="osc_gate_ring.ngc"/>
       <outfile xil_pn:name="osc_gate_ring.ngr"/>
@@ -81,7 +86,6 @@
       <outfile xil_pn:name="osc_gate_ring.xst"/>
       <outfile xil_pn:name="osc_gate_ring_envsettings.html"/>
       <outfile xil_pn:name="osc_gate_ring_summary.html"/>
-      <outfile xil_pn:name="osc_gate_ring_xst.xrpt"/>
       <outfile xil_pn:name="webtalk_pn.xml"/>
       <outfile xil_pn:name="xst"/>
     </transform>
