@@ -1,17 +1,17 @@
 set -tmpdir "xst/projnav.tmp"
 set -xsthdpdir "xst"
 run
--ifn osc_gate_ring.prj
+-ifn eval_pulse_count.prj
 -ifmt mixed
--ofn osc_gate_ring
+-ofn eval_pulse_count
 -ofmt NGC
 -p xc5vfx70t-1-ff1136
--top osc_gate_ring
+-top eval_pulse_count
 -opt_mode Speed
 -opt_level 1
 -power NO
 -iuc NO
--lso osc_gate_ring.lso
+-lso eval_pulse_count.lso
 -keep_hierarchy NO
 -netlist_hierarchy as_optimized
 -rtlview Yes

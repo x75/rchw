@@ -1,0 +1,21 @@
+Several modules for a Linux based auto-reconfigurable SoC
+
+dsrc:
+   data source. these are source modules for a stream processing chain targeted 
+	at audio processing. the main source is a AC'97 driver but several types of
+	generators can be used
+
+eval:
+   evaluate module output in hardware for artificial evolution. specifically,
+	this was intended for measuring the frequency of a given signal which would
+   too fast for the PPC to cope with
+
+osc:
+   several oscillator modules based on frequency division and inverter-cycles.
+   the interface is restricted to connect to standard logic
+
+osc_directout:
+	direct output variant of the oscillator circuits described above. direct
+	output means, that the oscillator with the reconfigurable partition is
+   connected directly to I/O logic, bypassing the static system.
+

@@ -1,0 +1,13 @@
+The ac97 modules contained in this directory are built upon the
+ac97 standalone code by Mike Wirthlin. This code comes with XUPV2P
+documentation, which can be downloaded from
+
+ - http://www.xilinx.com/univ/xupv2p.html
+
+If you load audio.zip (Audio Design for Micorblaze) and unpack this, you
+will find the relevant HDL in:
+
+audio/xupv2pro/mb/v91SysGen/bsp/edk_mb/pcores/opb_ac97_v2_00_a/hdl/vhdl/ 
+
+the missing modules need to be added as source-files in ISE.
+
