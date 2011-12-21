@@ -1,0 +1,3 @@
+vhdl isim_temp "my_mult.vhd"
+vhdl isim_temp "fir_gen.vhd"
+vhdl isim_temp "fir_gen_tb.vhd"

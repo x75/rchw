@@ -1,0 +1,2 @@
+vhdl work "bitwise_delay_2.vhd"
+vhdl work "bitwise_delay_2_tb.vhd"

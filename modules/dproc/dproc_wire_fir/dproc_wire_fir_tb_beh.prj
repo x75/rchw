@@ -1,0 +1,4 @@
+vhdl work "my_mult.vhd"
+vhdl work "fir_gen.vhd"
+vhdl work "dproc_wire_fir.vhd"
+vhdl work "dproc_wire_fir_tb.vhd"

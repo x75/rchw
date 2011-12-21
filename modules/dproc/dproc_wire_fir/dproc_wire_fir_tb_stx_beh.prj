@@ -1,0 +1,4 @@
+vhdl isim_temp "my_mult.vhd"
+vhdl isim_temp "fir_gen.vhd"
+vhdl isim_temp "dproc_wire_fir.vhd"
+vhdl isim_temp "dproc_wire_fir_tb.vhd"

@@ -1,0 +1,3 @@
+work	"dproc_wire_fir.vhd"
+work	"fir_gen.vhd"
+work	"my_mult.vhd"

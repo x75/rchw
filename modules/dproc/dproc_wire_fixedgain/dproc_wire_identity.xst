@@ -1,0 +1,6 @@
+set -tmpdir "/vol/repl311-vol1/public/stud/oberthol/DPR/experiments/audio_reconf_1/resources/dproc/dproc_wire_fixedgain/xst/projnav.tmp"
+set -xsthdpdir "/vol/repl311-vol1/public/stud/oberthol/DPR/experiments/audio_reconf_1/resources/dproc/dproc_wire_fixedgain/xst"
+elaborate
+-lso "/vol/repl311-vol1/public/stud/oberthol/DPR/experiments/audio_reconf_1/resources/dproc/dproc_wire_fixedgain/dproc_wire_identity.lso"
+-ifn dproc_wire_identity.prj
+-ifmt mixed

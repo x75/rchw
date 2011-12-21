@@ -1,0 +1,4 @@
+vhdl work "../../aprlib/lfsr/lfsr_pkg.vhd"
+vhdl work "../../aprlib/lfsr/lfsr.vhd"
+vhdl work "dproc_wire_lfsr_01.vhd"
+vhdl work "dproc_wire_lfsr_01_tb.vhd"

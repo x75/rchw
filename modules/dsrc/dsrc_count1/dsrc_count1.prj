@@ -1,0 +1,2 @@
+vhdl work "../../aprlib/memwr_dbuf.vhd"
+vhdl work "dsrc_count1.vhd"

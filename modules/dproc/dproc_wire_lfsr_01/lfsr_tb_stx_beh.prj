@@ -1,0 +1,3 @@
+vhdl isim_temp "../../aprlib/lfsr/lfsr_pkg.vhd"
+vhdl isim_temp "../../aprlib/lfsr/lfsr.vhd"
+vhdl isim_temp "../../aprlib/lfsr/lfsr_tb.vhd"

@@ -1,0 +1,6 @@
+rchw/modules/dproc
+
+data processing modules for the reconfigurable audio app.
+
+modules having _wire_ in their name are the more recent
+ones. everything else is legacy-ware.

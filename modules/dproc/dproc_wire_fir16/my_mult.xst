@@ -1,0 +1,6 @@
+set -tmpdir "/vol/repl311-vol1/public/stud/oberthol/DPR/experiments/audio_reconf_1/resources/dproc/dproc_wire_fir/xst/projnav.tmp"
+set -xsthdpdir "/vol/repl311-vol1/public/stud/oberthol/DPR/experiments/audio_reconf_1/resources/dproc/dproc_wire_fir/xst"
+elaborate
+-lso "/vol/repl311-vol1/public/stud/oberthol/DPR/experiments/audio_reconf_1/resources/dproc/dproc_wire_fir/my_mult.lso"
+-ifn my_mult.prj
+-ifmt mixed

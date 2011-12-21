@@ -1,0 +1,2 @@
+vhdl work "dproc_wire_fixedgain.vhd"
+vhdl work "dproc_wire_fixedgain_tb.vhd"

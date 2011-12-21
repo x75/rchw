@@ -1,0 +1,3 @@
+vhdl work "proc_delay.vhd"
+vhdl work "dproc_synccopy.vhd"
+vhdl work "dproc_synccopy_tb.vhd"

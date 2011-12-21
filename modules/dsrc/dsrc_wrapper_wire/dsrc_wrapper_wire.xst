@@ -1,0 +1,6 @@
+set -tmpdir "/vol/repl311-vol1/public/stud/oberthol/DPR/experiments/audio_reconf_1/resources/dsrc/dsrc_wrapper_wire/xst/projnav.tmp"
+set -xsthdpdir "/vol/repl311-vol1/public/stud/oberthol/DPR/experiments/audio_reconf_1/resources/dsrc/dsrc_wrapper_wire/xst"
+elaborate
+-lso "/vol/repl311-vol1/public/stud/oberthol/DPR/experiments/audio_reconf_1/resources/dsrc/dsrc_wrapper_wire/dsrc_wrapper_wire.lso"
+-ifn dsrc_wrapper_wire.prj
+-ifmt mixed

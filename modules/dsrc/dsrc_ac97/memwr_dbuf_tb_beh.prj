@@ -1,0 +1,2 @@
+vhdl work "memwr_dbuf.vhd"
+vhdl work "memwr_dbuf_tb.vhd"

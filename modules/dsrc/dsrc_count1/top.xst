@@ -1,0 +1,6 @@
+set -tmpdir "/vol/fob-vol3/nebenf02/oberthol/SE_hwsv/DPR/experiments/audio_reconf_1/dsrc/xst/projnav.tmp"
+set -xsthdpdir "/vol/fob-vol3/nebenf02/oberthol/SE_hwsv/DPR/experiments/audio_reconf_1/dsrc/xst"
+elaborate
+-lso "/vol/fob-vol3/nebenf02/oberthol/SE_hwsv/DPR/experiments/audio_reconf_1/dsrc/top.lso"
+-ifn top.prj
+-ifmt mixed

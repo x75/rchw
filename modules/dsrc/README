@@ -1,3 +1,7 @@
+dsrc
+
+data-sources for the reconfigurable audio processing app.
+
 The ac97 modules contained in this directory are built upon the
 ac97 standalone code by Mike Wirthlin. This code comes with XUPV2P
 documentation, which can be downloaded from

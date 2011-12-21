@@ -1,0 +1,2 @@
+vhdl work "netgen/par/bitwise_delay_2_timesim.vhd"
+vhdl work "bitwise_delay_2_tb.vhd"

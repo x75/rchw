@@ -1,0 +1,5 @@
+vhdl work "ac97_opb/ac97_timing.vhd"
+vhdl work "ac97_opb/ac97_core.vhd"
+vhdl work "ac97_opb/ac97_command_rom.vhd"
+vhdl work "ac97_opb/ac97_if.vhd"
+vhdl work "audio_standalone_top.vhd"

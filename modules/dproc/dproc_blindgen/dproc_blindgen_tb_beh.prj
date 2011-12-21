@@ -1,0 +1,2 @@
+vhdl work "dproc_blindgen.vhd"
+vhdl work "dproc_blindgen_tb.vhd"

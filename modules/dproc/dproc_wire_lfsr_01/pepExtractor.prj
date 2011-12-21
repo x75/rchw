@@ -1,0 +1,3 @@
+work	"../../aprlib/lfsr/lfsr.vhd"
+work	"../../aprlib/lfsr/lfsr_pkg.vhd"
+work	"dproc_lfsr_01.vhd"

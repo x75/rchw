@@ -1,0 +1,5 @@
+vhdl work "../../audio_standalone/ac97_opb/ac97_timing.vhd"
+vhdl work "../../audio_standalone/ac97_opb/ac97_core.vhd"
+vhdl work "../../audio_standalone/ac97_opb/ac97_command_rom.vhd"
+vhdl work "../../audio_standalone/ac97_opb/ac97_if.vhd"
+vhdl work "dsrc_wire_ac97.vhd"

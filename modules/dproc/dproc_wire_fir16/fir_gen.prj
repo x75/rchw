@@ -1,0 +1,2 @@
+vhdl work "my_mult.vhd"
+vhdl work "fir_gen.vhd"

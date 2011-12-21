@@ -1,0 +1,3 @@
+vhdl isim_temp "proc_delay.vhd"
+vhdl isim_temp "dproc_synccopy.vhd"
+vhdl isim_temp "dproc_synccopy_tb.vhd"

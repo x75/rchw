@@ -1,0 +1,2 @@
+vhdl isim_temp "dproc_blindgen.vhd"
+vhdl isim_temp "dproc_blindgen_tb.vhd"
