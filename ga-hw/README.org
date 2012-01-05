@@ -1,0 +1,22 @@
+evolvable hardware sub-project
+
+20110819, oswald berthold, part of diploma thesis on DPR / Linux
+
+the goal here is to get evolutionary methods applied to FPGA
+subcircuit design
+
+* the plan is as follows
+** implement genetic algorithm in pure python
+ - ga1.py: straightforward LUT evolution test
+ - ga2.py: re-implement ga1.py with pyevolve
+
+** implement genetic algorithm in DPR/Linux system
+  - evolution manager on Embedded Linux
+  - genotype to phenotype mapping with RapidSmith via remote
+		Linux PC (because of java/ppc)
+  - intrinsic fitness evaluation
+
+** implement genetic algorithm with netlists and simulation
+
+with real LUTs with either MyHDL or straight VHDL and evaluate
+the result by netlist simulation
