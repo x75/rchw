@@ -1,0 +1,141 @@
+\tikzset{
+ tip/.style={->,shorten >=1pt},
+  block/.style = {
+    draw, fill=blue!20, rectangle,
+    minimum height=3em, minimum width=6em
+  },
+  output/.style = {
+    coordinate},
+  point/.style = {
+    coordinate
+  },
+  hw/.style = {
+            draw,
+            rounded corners=1pt},
+	entity/.style = {},
+	comp_inst/.style = {font=\small},
+	if_in/.style = {
+	    draw,
+	    minimum height=12pt,
+	    minimum width=30pt,
+	    font=\scriptsize},
+	if_out/.style = {
+	    draw,
+	    minimum height=12pt,
+	    minimum width=30pt,
+	    font=\scriptsize},
+	>=open triangle 60,
+  entity-frame/.style = {rounded corners=1pt}
+}
+
+
+\begin{tikzpicture}[]
+%\draw[help lines](-4,-2) grid (4,2);
+
+%% entity name
+\node (top-entity) [entity] at (-1.4,1) {frequency\_divider\_1};
+
+%% input ports
+\matrix(in_ports) [] 
+	at (-3,0)
+{
+	%% \node(in_1_port) [left=1cm] {}; & \node(nix) [minimum width=20pt] {}; & \node(in_1_clk) [if_in] {Clk}; \\
+  %% \node(in_2_port) [left=1cm] {}; & \node(nix) [minimum width=20pt] {}; & \node(in_2_enable) [if_in] {Enable}; \\
+  %% \node(in_3_port) [left=1cm] {}; & \node(nix) [minimum width=20pt] {}; & \node(in_3_data) [if_in] {Data}; \\
+  \node(in_1_port) [left=1cm] {}; & \node(nix) [minimum width=20pt] {}; & \node(in_1_blk) [if_in] {clk}; \\
+   \node(in_2_port) [left=1cm] {}; & \node(nix) [minimum width=20pt] {}; & \node(in_2_blk) [if_in] {enable}; \\
+   \node(in_3_port) [left=1cm] {}; & \node(nix) [minimum width=20pt] {}; & \node(in_3_blk) [if_in] {data}; \\
+};
+
+%% \draw[>-] (in_1_port.west) -- (in_1_clk);
+%% \draw[>-] (in_2_port.west) -- (in_2_enable);
+%% \draw[>-] (in_3_port.west) -- (in_3_data);
+\draw[>-] (in_1_port.west) -- (in_1_blk);
+\draw[>-] (in_2_port.west) -- (in_2_blk);
+\draw[>-] (in_3_port.west) -- (in_3_blk);
+
+%% output port
+\matrix(out_ports) 
+ [
+% 	matrix of nodes,
+% 	nodes in empty cells,
+% 	nodes={draw}
+]
+	at (4,0)
+{
+	%% \node(out_1_o_out) [if_out] {$O_Out$}; & \node(nix) [minimum width=20pt] {}; & \node(out_1_port) [left=1cm] {}; \\
+  %% \node(out_2_outinv) [if_in] {OutInv}; & \node(nix) [minimum width=20pt] {}; & \node(out_2_port) [left=1cm] {}; \\
+\node(out_1_blk) [if_out] {$o\_out$}; & \node(nix) [minimum width=20pt] {}; & \node(out_1_port) [left=1cm] {}; \\
+\node(out_2_blk) [if_out] {$o\_inv$}; & \node(nix) [minimum width=20pt] {}; & \node(out_2_port) [left=1cm] {}; \\
+	& &  \\
+};
+
+%% \draw[->] (out_1_o_out) -- (out_1_port.east);
+%% \draw[->] (out_2_outinv) -- (out_2_port.east);
+\draw[->] (out_1_blk) -- (out_1_port.east);
+\draw[->] (out_2_blk) -- (out_2_port.east);
+
+%% components, signals, processes
+%\node(inst_1) [comp_inst] at(0, 0) {Comp inst 1};
+
+%% \matrix(in_ports) [] 
+%% 	at (0,-1)
+%% {
+%% 	\node(inst_in_1_clk) [if_in] {Clk}; & \node(inst_out_1_o_out) [if_out] {$O_Out$}; \\
+%%   \node(inst_in_2_enable) [if_in] {Enable}; & \node(inst_out_2_outinv) [if_out] {OutInv}; \\
+%%   \node(inst_in_3_data) [if_in] {Data}; & \\
+%%   \\
+%% };
+
+%% instances
+\node(inst_1) [comp_inst] at(0, -0.0) {Comp inst 1};
+\matrix(in_ports) []
+	at (0,-1.0)
+{
+  \node(inst1_in_1_blk) [if_in] {clk   }; & \node(inst1_out_1_blk) [if_out] {    o\_osz }; \\
+\node(inst1_in_2_blk) [if_in] {    enable  }; & \\
+};
+\node(inst_2) [comp_inst] at(0, -2.5) {Comp inst 2};
+\matrix(in_ports) []
+	at (0,-3.5)
+{
+  \node(inst2_in_1_blk) [if_in] {clk   }; & \node(inst2_out_1_blk) [if_out] {    o\_osz }; \\
+\node(inst2_in_2_blk) [if_in] {    enable  }; & \\
+};
+
+
+%% assignments / signals
+%\node (sig_o_osz) [if_in,] at(0,-2.5) {o\_osz\_1 and o\_osz\_2};
+\node (sig_1_blk) [if_in,] at(0,-6.0) {d = enable};
+\node (sig_2_blk) [if_in,] at(0,-5.5) {o\_out = o\_osz\_0 and o\_osz\_1};
+\node (sig_3_blk) [if_in,] at(0,-5.0) {o\_inv = not(o\_osz\_0 and o\_osz\_1)};
+
+
+%% from input ports
+%\draw[->] (in_1_blk.east) .. controls +(0.5,0.) and +(-0.5,-0.) .. (inst1_in_1_blk.west);
+%\draw[->] (in_2_blk.east) .. controls +(0.5,0.) and +(-0.5,-0.) .. (inst1_in_2_blk.west);
+\draw[->] (in_1_blk.east) .. controls +(0.5,0.) and +(-0.5,-0.) .. (inst1_in_1_blk.west);
+\draw[->] (in_2_blk.east) .. controls +(0.5,0.) and +(-0.5,-0.) .. (inst1_in_2_blk.west);
+\draw[->] (in_1_blk.east) .. controls +(0.5,0.) and +(-0.5,-0.) .. (inst2_in_1_blk.west);
+\draw[->] (in_2_blk.east) .. controls +(0.5,0.) and +(-0.5,-0.) .. (inst2_in_2_blk.west);
+
+%\draw[->] (in_3_blk.east) .. controls +(0.5,0.) and +(-0.5,-0.) .. (inst1_in_3_blk.west);
+%% to signals
+%\draw[->] (inst1_out_1_blk.east) .. controls +(1,0) and +(-1, 0) .. (sig_2_blk.west);
+%\draw[->] (inst_out_2_outinv.east) .. controls +(1,0) and +(-1, 0) .. (sig_2.west);
+\draw[->] (inst1_out_1_blk.east) .. controls +(0.5,0.) and +(-0.5,-0.) .. (sig_2_blk.west);
+\draw[->] (inst1_out_1_blk.east) .. controls +(0.5,0.) and +(-0.5,-0.) .. (sig_3_blk.west);
+\draw[->] (inst2_out_1_blk.east) .. controls +(0.5,0.) and +(-0.5,-0.) .. (sig_2_blk.west);
+\draw[->] (inst2_out_1_blk.east) .. controls +(0.5,0.) and +(-0.5,-0.) .. (sig_3_blk.west);
+
+%% to output ports
+%\draw[->] (sig_2_blk.east)  .. controls +(0.5,0.) and +(-0.5,-0.) .. (out_1_blk.west);
+\draw[->] (sig_2_blk.east)  .. controls +(0.5,0.) and +(-0.5,-0.) .. (out_1_blk.west);
+\draw[->] (sig_3_blk.east)  .. controls +(0.5,0.) and +(-0.5,-0.) .. (out_2_blk.west);
+
+
+%% frames
+%\draw [entity-frame, thick] (-3.5,1.5) rectangle (4,-3);
+%\draw [] (-1,0.4) rectangle (1,-1.7);
+
+\end{tikzpicture}

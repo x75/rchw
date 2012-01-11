@@ -1,0 +1,100 @@
+\tikzset{
+ tip/.style={->,shorten >=1pt},
+  block/.style = {
+    draw, fill=blue!20, rectangle,
+    minimum height=3em, minimum width=6em
+  },
+  output/.style = {
+    coordinate},
+  point/.style = {
+    coordinate
+  },
+  hw/.style = {
+            draw,
+            rounded corners=1pt},
+	entity/.style = {},
+	comp_inst/.style = {font=\small},
+	if_in/.style = {
+	    draw,
+	    minimum height=12pt,
+	    minimum width=30pt,
+	    font=\scriptsize},
+	if_out/.style = {
+	    draw,
+	    minimum height=12pt,
+	    minimum width=30pt,
+	    font=\scriptsize},
+	>=open triangle 60,
+  entity-frame/.style = {rounded corners=1pt}
+}
+
+
+\begin{tikzpicture}[]
+%\draw[help lines](-4,-2) grid (4,2);
+
+%% entity name
+\node (top-entity) [entity] at (-1.4,1) {Entity name};
+
+%% input ports
+\matrix(in_ports) [
+	%matrix of nodes,
+	%nodes in empty cells,
+	%nodes={draw}
+] 
+	at (-3,0)
+{
+	\node(in_1_port) [left=1cm] {}; & \node(nix) [minimum width=20pt] {}; & \node(in_1_clk) [if_in] {Clk}; \\
+  \node(in_2_port) [left=1cm] {}; & \node(nix) [minimum width=20pt] {}; & \node(in_2_enable) [if_in] {Enable}; \\
+  \node(in_3_port) [left=1cm] {}; & \node(nix) [minimum width=20pt] {}; & \node(in_3_data) [if_in] {Data}; \\
+};
+
+\draw[>-] (in_1_port.west) -- (in_1_clk);
+\draw[>-] (in_2_port.west) -- (in_2_enable);
+\draw[>-] (in_3_port.west) -- (in_3_data);
+
+%% output port
+\matrix(out_ports) 
+ [
+% 	matrix of nodes,
+% 	nodes in empty cells,
+% 	nodes={draw}
+]
+	at (4,0)
+{
+	\node(out_1_out) [if_in] {Out}; & \node(nix) [minimum width=20pt] {}; & \node(out_1_port) [left=1cm] {}; \\
+  \node(out_2_outinv) [if_in] {OutInv}; & \node(nix) [minimum width=20pt] {}; & \node(out_2_port) [left=1cm] {}; \\
+	& &  \\
+};
+
+\draw[->] (out_1_out) -- (out_1_port.east);
+\draw[->] (out_2_outinv) -- (out_2_port.east);
+
+%% components, signals, processes
+\node(inst_1) [comp_inst] at(0, 0) {Comp inst 1};
+
+\matrix(in_ports) [] 
+	at (0,-1)
+{
+	\node(inst_in_1_clk) [if_in] {Clk}; & \node(inst_out_1_out) [if_out] {Out}; \\
+  \node(inst_in_2_enable) [if_in] {Enable}; & \node(inst_out_2_outinv) [if_out] {OutInv}; \\
+  \node(inst_in_3_data) [if_in] {Data}; & \\
+};
+
+%% assignments / signals
+\node (sig_o_osz) [if_in,] at(0,-2.5) {o\_osz\_1 and o\_osz\_2};
+
+%% from input ports
+\draw[->] (in_1_clk.east) .. controls +(0.5,0.) and +(-0.5,-0.) .. (inst_in_1_clk.west);
+\draw[->] (in_2_enable.east) .. controls +(0.5,0.) and +(-0.5,-0.) .. (inst_in_2_enable.west);
+\draw[->] (in_3_data.east) .. controls +(0.5,0.) and +(-0.5,-0.) .. (inst_in_3_data.west);
+%% to signals
+\draw[->] (inst_out_1_out.east) .. controls +(1,0) and +(-1, 0) .. (sig_o_osz.west);
+\draw[->] (inst_out_2_outinv.east) .. controls +(1,0) and +(-1, 0) .. (sig_o_osz.west);
+%% to output ports
+\draw[->] (sig_o_osz.east)  .. controls +(0.5,0.) and +(-0.5,-0.) .. (out_1_out.west);
+
+%% frames
+\draw [entity-frame, thick] (-3.5,1.5) rectangle (4,-3);
+\draw [] (-1,0.4) rectangle (1,-1.7);
+
+\end{tikzpicture}

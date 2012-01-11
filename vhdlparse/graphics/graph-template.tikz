@@ -1,0 +1,50 @@
+\tikzset{
+ tip/.style={->,shorten >=1pt},
+  block/.style = {
+    draw, fill=blue!20, rectangle,
+    minimum height=3em, minimum width=6em
+  },
+  output/.style = {
+    coordinate},
+  point/.style = {
+    coordinate
+  },
+  hw/.style = {
+            draw,
+            rounded corners=1pt},
+	entity/.style = {},
+	comp_inst/.style = {font=\small},
+	if_in/.style = {
+	    draw,
+	    minimum height=12pt,
+	    minimum width=30pt,
+	    font=\scriptsize},
+	if_out/.style = {
+	    draw,
+	    minimum height=12pt,
+	    minimum width=30pt,
+	    font=\scriptsize},
+	>=open triangle 60,
+  entity-frame/.style = {rounded corners=1pt}
+}
+
+
+\begin{tikzpicture}[]
+	\matrix[] {
+    \node (topmark) [coordinate,below=50pt,right=30pt] {x}; & & & \\
+
+%		& \draw[->] (-1,0) -- (0,0); & \node (if_in_clk) [if_in] {Clk}; &
+%    & \node (if_out_clk) [if_out] {Clk}; & \draw[->] (-1,0) -- (0,0); \\
+%		 \\
+
+    ${ports}
+
+    & & & & \node (botmark) [coordinate,left=10pt] {}; \\
+    \\
+	};
+
+	\node (entity) [entity,above=0.1cm of topmark] {${entity}};
+  \draw[entity-frame] (entity.north west) rectangle (botmark.south);
+
+	% \draw[rectangle={(0,0),{1,1)}];
+\end{tikzpicture}
