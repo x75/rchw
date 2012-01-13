@@ -6,7 +6,7 @@
 -- Author     : Oswald Berthold  <opt@sdfk.de>
 -- Company    : 
 -- Created    : 2011-11-23
--- Last update: 2011-11-25
+-- Last update: 2011-12-21
 -- Platform   : 
 -- Standard   : VHDL'87
 -------------------------------------------------------------------------------
@@ -25,7 +25,7 @@ use ieee.std_logic_1164.all;
 entity bitwise_delay_2 is
   
   generic (
-    width : integer := 32;
+    width : integer := 128;
     delay : integer := 15);
 
   Port (
