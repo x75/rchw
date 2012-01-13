@@ -5,7 +5,9 @@ Re-Configurable Hardware
   GPL where applicable
 
 A collection of different tools, scripts and documentation on
-reconfigurable hardware (FPGAs).
+reconfigurable hardware (FPGAs). As usual this is not meant as a
+canonical toolset. Rather most of the stuff in here is ad-hoc and
+provided as is.
 
  - ga-hw: Genetic algorithm with pyevolve for evolution of hardware
    circuits
@@ -16,3 +18,13 @@ reconfigurable hardware (FPGAs).
  - util: some utilities for working with embedded systems on Xilinx FPGAs
  - vhdlparse: parse vhdl entities and generate a wrapper for use with
    xps, generate tikz graphics for entity representation
+
+= Related
+
+See the following items for more information
+ - https://en.wikipedia.org/wiki/Reconfigurable_computing
+ - Xilinx Partial Reconfiguration Documentation
+ - Rapid Creation of FPGA CAD Tools for Xilinx FPGAs: http://rapidsmith.sourceforge.net/
+ - Tools for Open Reconfigurable Computing: http://torc-isi.sourceforge.net/
+ - Reconfigure in the Open!: http://openpr-vt.sourceforge.net/OpenPR/OpenPR.html
+ - http://www2.informatik.hu-berlin.de/~oberthol/html/Hardware.html
