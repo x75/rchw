@@ -1,11 +1,18 @@
 
 Re-Configurable Hardware
 
-A collection of different tools, scripts and documentation on reconfigurable hardware (FPGAs).
+  2010, 2011, 2012 Oswald Berthold
+  GPL where applicable
 
+A collection of different tools, scripts and documentation on
+reconfigurable hardware (FPGAs).
+
+ - ga-hw: Genetic algorithm with pyevolve for evolution of hardware
+   circuits
  - genmake: generate makefiles for using the Xilinx toolchain to synthesise
 	single modules
- - vhdlparse: parse vhdl entities and generate a wrapper for use with xps
- - util: some utilities for working with embedded systems on Xilinx FPGAs
  - icap-writer: modified "bitinfo" project to write bitstreams headerless to /dev/icap
- - modules: HDL sources for module implementations
+ - modules: various HDL sources for module implementations
+ - util: some utilities for working with embedded systems on Xilinx FPGAs
+ - vhdlparse: parse vhdl entities and generate a wrapper for use with
+   xps, generate tikz graphics for entity representation
