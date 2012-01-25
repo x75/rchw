@@ -17,12 +17,12 @@
 	if_in/.style = {
 	    draw,
 	    minimum height=12pt,
-	    minimum width=30pt,
+	    minimum width=7cm, %30pt,
 	    font=\scriptsize},
 	if_out/.style = {
 	    draw,
 	    minimum height=12pt,
-	    minimum width=30pt,
+	    minimum width=7cm, %30pt,
 	    font=\scriptsize},
 	>=open triangle 60,
   entity-frame/.style = {rounded corners=1pt}
@@ -33,11 +33,11 @@
 %\draw[help lines](-4,-2) grid (4,2);
 
 %% entity name
-\node (top-entity) [entity] at (-1.4,1) {$entity};
+\node (top-entity) [entity] at ($entity_x,$entity_y) {$entity};
 
 %% input ports
 \matrix(in_ports) [] 
-	at (-3,0)
+	at ($in_ports_x,0)
 {
 	%% \node(in_1_port) [left=1cm] {}; & \node(nix) [minimum width=20pt] {}; & \node(in_1_clk) [if_in] {Clk}; \\
   %% \node(in_2_port) [left=1cm] {}; & \node(nix) [minimum width=20pt] {}; & \node(in_2_enable) [if_in] {Enable}; \\
@@ -57,7 +57,7 @@ ${in_port_cons}
 % 	nodes in empty cells,
 % 	nodes={draw}
 ]
-	at (4,0)
+	at ($out_ports_x,0)
 {
 	%% \node(out_1_o_out) [if_out] {$$O_Out$$}; & \node(nix) [minimum width=20pt] {}; & \node(out_1_port) [left=1cm] {}; \\
   %% \node(out_2_outinv) [if_in] {OutInv}; & \node(nix) [minimum width=20pt] {}; & \node(out_2_port) [left=1cm] {}; \\
