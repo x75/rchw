@@ -5,7 +5,7 @@ run
 -ifmt mixed
 -ofn bitwise_delay_2
 -ofmt NGC
--p xc5vfx70tff1136-1
+-p xc5vfx70t-1-ff1136
 -top bitwise_delay_2
 -opt_mode Speed
 -opt_level 1
