@@ -35,7 +35,7 @@ architecture Behavioral of osc_gate_ring is
 begin
   delayline_inst : delayline
     generic map (
-      linelength => 78)
+      linelength => 4)
     port map (
       sgnl         => delayline_input,
       delayed_sgnl => delayline_output);
