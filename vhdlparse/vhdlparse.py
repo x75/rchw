@@ -74,29 +74,40 @@ def parse_hdl(vhdstring):
     ent_ident = ident.setResultsName("ENT_NAME")
     number = Word(nums + ".")
     paren = oneOf("( )")
+    oper = oneOf("* + - /")
     punctuation = oneOf("; :")
     direction = oneOf("in out inout")
     vecspec = oneOf("downto upto to")
     wildToken = Word(alphas, alphanums + "_-", punctuation, paren)
     assignToken = Keyword("<=")
+    definitionToken = Keyword(":=")
+    numberOper = number | (paren + number + oper + ident + paren + oper + number)
     # assignrhs = (ident | (ident + paren + number + paren) | (ident + paren + number + vecspec + number + paren))
     assignrhs = ident + Optional(paren + number + Optional(vecspec + number) + paren)
     assignment = Group(assignrhs + assignToken + SkipTo(punctuation) + punctuation)
 
-    portType = oneOf("unsigned signed std_logic_vector std_logic", caseless=True)
-    portTypeFull = portType + Optional(paren + \
-                                       number + \
-                                       vecspec + \
-                                       Word(nums) + \
-                                       paren)
+    portType = oneOf("unsigned signed std_logic_vector std_logic integer", caseless=True)
+    portAggregateTypeDef = paren + \
+                           numberOper + \
+                           vecspec + \
+                           Word(nums) + \
+                           paren
+    portTypeFull = portType + Optional(portAggregateTypeDef)
+    # generics
+    rangeToken = Keyword("range", caseless=True)
+    genericRange = rangeToken + number + vecspec + number
+    genericLine = Group(ident + punctuation + portType + Optional(genericRange) + definitionToken + number + Optional(punctuation))
+    genericSpec = ZeroOrMore(genericLine)
+    generics = genericToken + paren + genericSpec + paren + punctuation
+    
     # number = nums
     portLine = Group(ident + punctuation + direction + portTypeFull + Optional(punctuation))
     portSpec = ZeroOrMore(portLine).setResultsName("PORTSPEC")
 
     # processes
     procToken = Keyword("process", caseless=True)
-    procBeginToken = procToken + SkipTo(beginToken) + beginToken
-    procEndToken = endToken + procToken + punctuation
+    procBeginToken = Optional(ident + punctuation) + procToken + SkipTo(beginToken) + beginToken
+    procEndToken = endToken + procToken + Optional(ident) + punctuation
     process = Group(procBeginToken + SkipTo(procEndToken) + procEndToken)
 
     # instances
@@ -120,6 +131,7 @@ def parse_hdl(vhdstring):
     # HDL_ent = Literal("entity") +
     # instantiate parser
     HDL_ent = entityToken + ent_ident + Literal("is") + \
+              Optional(generics) + \
               portToken + paren + portSpec + paren + punctuation + \
               endToken + Optional(entityToken) + ident + punctuation
 

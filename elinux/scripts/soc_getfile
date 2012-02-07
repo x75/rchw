@@ -1,0 +1,10 @@
+#!/bin/sh
+
+# recevive data via netcat for pre ssh install data transfer
+
+if test -z $1 ; then
+	echo "need output file"
+	exit 1
+fi
+
+nc -l -p 1234 >$1

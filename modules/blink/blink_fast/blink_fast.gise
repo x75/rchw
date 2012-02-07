@@ -31,7 +31,6 @@
     <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_XST_STX" xil_pn:name="blink_fast.stx"/>
     <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_XST_REPORT" xil_pn:name="blink_fast.syr"/>
     <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_XST" xil_pn:name="blink_fast.xst"/>
-    <file xil_pn:fileType="FILE_HTML" xil_pn:name="blink_fast_envsettings.html"/>
     <file xil_pn:fileType="FILE_HTML" xil_pn:name="blink_fast_summary.html"/>
     <file xil_pn:fileType="FILE_XRPT" xil_pn:name="blink_fast_xst.xrpt"/>
     <file xil_pn:fileType="FILE_FITTER_REPORT" xil_pn:name="webtalk_pn.xml"/>
@@ -67,7 +66,7 @@
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
     </transform>
-    <transform xil_pn:end_ts="1283442468" xil_pn:in_ck="8650547699554797485" xil_pn:name="TRANEXT_xstsynthesize_virtex5" xil_pn:prop_ck="-7910759193143649857" xil_pn:start_ts="1283442452">
+    <transform xil_pn:end_ts="1328614558" xil_pn:in_ck="8650547699554797485" xil_pn:name="TRANEXT_xstsynthesize_virtex5" xil_pn:prop_ck="-7910759193143649857" xil_pn:start_ts="1328614535">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="WarningsGenerated"/>
       <status xil_pn:value="ReadyToRun"/>
@@ -82,7 +81,6 @@
       <outfile xil_pn:name="blink_fast.stx"/>
       <outfile xil_pn:name="blink_fast.syr"/>
       <outfile xil_pn:name="blink_fast.xst"/>
-      <outfile xil_pn:name="blink_fast_envsettings.html"/>
       <outfile xil_pn:name="blink_fast_summary.html"/>
       <outfile xil_pn:name="blink_fast_xst.xrpt"/>
       <outfile xil_pn:name="webtalk_pn.xml"/>
