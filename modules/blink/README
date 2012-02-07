@@ -1,0 +1,8 @@
+
+Some example modules for blinking LEDs in partially
+reconfigurable and static mode
+
+ - blink: EDK wrapper for PR modules
+ - blink_(fast|medium|slow): 3 different blink frequency
+   implementation
+ - blink_static: a static (non PR) version
