@@ -35,6 +35,7 @@
 %% entity name
 \node (top-entity) [entity] at (-1.4,1) {Entity name};
 
+
 %% input ports
 \matrix(in_ports) [
 	%matrix of nodes,

@@ -124,8 +124,8 @@ def run_main():
     genome = G1DBinaryString.G1DBinaryString(bitstrlen)
 
     # The evaluator function (objective function)
-    genome.evaluator.set(eval_func)
-    # genome.evaluator.set(eval_func_onhardware)
+    # genome.evaluator.set(eval_func)
+    genome.evaluator.set(eval_func_onhardware)
     genome.mutator.set(Mutators.G1DBinaryStringMutatorFlip)
 
     # Genetic Algorithm Instance
@@ -146,7 +146,9 @@ def run_main():
 
     # Best individual
     print ga.bestIndividual()
-    print target.bin
+    print "target:", target.bin
+    print "date:"
+    # do timings of all components: bitgen, eval, 
 
     f = open("best-ind.txt", "w")
     f.write(str(ga.bestIndividual()))

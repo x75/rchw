@@ -58,22 +58,30 @@ def read_hdl(vhdfile):
     # print vhdstring
     return vhdstring
 
+def clean_underscore(s):
+    """replace underscores with latex compatible string"""
+    return re.sub("_", "\_", s)
+
 def parse_hdl(vhdstring):
     entityToken = Keyword("entity", caseless=True).setResultsName("ENT")
     beginToken = Keyword("begin", caseless=True).setResultsName("BEGIN")
     endToken = Keyword("end", caseless=True).setResultsName("END")
     portToken = Keyword("port", caseless=True).setResultsName("PORT")
+    genericToken = Keyword("generic", caseless=True).setResultsName("GENERIC")
     mapToken = Keyword("map", caseless=True)
+    attributeToken = Keyword("attribute", caseless=True)
     ident = Word(alphas, alphanums + "_")
     ent_ident = ident.setResultsName("ENT_NAME")
     number = Word(nums + ".")
     paren = oneOf("( )")
     punctuation = oneOf("; :")
     direction = oneOf("in out inout")
-    vecspec = oneOf("downto upto")
+    vecspec = oneOf("downto upto to")
     wildToken = Word(alphas, alphanums + "_-", punctuation, paren)
     assignToken = Keyword("<=")
-    assignment = Group(ident + assignToken + SkipTo(punctuation) + punctuation)
+    # assignrhs = (ident | (ident + paren + number + paren) | (ident + paren + number + vecspec + number + paren))
+    assignrhs = ident + Optional(paren + number + Optional(vecspec + number) + paren)
+    assignment = Group(assignrhs + assignToken + SkipTo(punctuation) + punctuation)
 
     portType = oneOf("unsigned signed std_logic_vector std_logic", caseless=True)
     portTypeFull = portType + Optional(paren + \
@@ -92,7 +100,8 @@ def parse_hdl(vhdstring):
     process = Group(procBeginToken + SkipTo(procEndToken) + procEndToken)
 
     # instances
-    instBeginToken = ident + punctuation + ident + portToken + mapToken + \
+    genericMap = genericToken + mapToken + paren + SkipTo(paren) + paren
+    instBeginToken = ident + punctuation + ident + Optional(genericMap) + portToken + mapToken + \
                      paren
     instEndToken = paren + punctuation
     instToken = Group(instBeginToken + SkipTo(instEndToken) + instEndToken)
@@ -106,7 +115,7 @@ def parse_hdl(vhdstring):
     archBodyElems = ZeroOrMore(process|assignment|instToken).setResultsName("ARCH_BODY_ELEM")
     archBody = beginToken + \
                archBodyElems + \
-               endToken + Optional(ident) + punctuation # ZeroOrMore(wildToken)
+               endToken + Optional(Optional(archToken) + ident) + punctuation # ZeroOrMore(wildToken)
     
     # HDL_ent = Literal("entity") +
     # instantiate parser
@@ -209,7 +218,7 @@ def write_hdl_wrapper(vhdfile, parseres):
     ports = parseres_get_portline(parseres)
     i = 0
     for port in ports:
-        print i, port
+        # print i, port
         ent_s.insert(2+i, "\t\t" + string.join(port))
         i += 1
 
@@ -235,7 +244,7 @@ def write_hdl_wrapper(vhdfile, parseres):
         ]
     i = 0
     for port in ports:
-        print i, port
+        # print i, port
         comp_s.insert(2+i, "\t\t\t" + string.join(port))
         i += 1
     for comp_l in comp_s:
@@ -248,7 +257,7 @@ def write_hdl_wrapper(vhdfile, parseres):
     f.write("\n")
     signals = []
     for port in ports:
-        print "port: ", port
+        # print "port: ", port
         re_mo = re.search("clk", port[0], re.I)
         if re_mo == None:
             signals.append("\t" + "signal " + port[0] + "_buf " + port[1] + " " + string.join(port[3:len(port)]))
@@ -274,7 +283,7 @@ def write_hdl_wrapper(vhdfile, parseres):
         ]
     i = 0
     for port in ports:
-        print i, port
+        # print i, port
         # check for clock signal
         re_mo = re.search("clk", port[0], re.I)
         if re_mo == None:
@@ -314,13 +323,14 @@ def write_hdl_wrapper(vhdfile, parseres):
         re_mo = re.search("clk", port[0], re.I)
         if re_mo == None:
             if port[2] == "in":
-                print "in"
+                # print "in"
                 f.write("\t\t\t" + port[0] + "_buf" + " <= " + port[0] + " ;")
             elif port[2] == "out":
-                print "out"
+                # print "out"
                 f.write("\t\t\t" + port[0] + " <= " + port[0] + "_buf" + " ;")
             else:
-                print "-- neither"
+                # print "-- neither"
+                pass
             f.write("\n")
 
     # close register
@@ -346,6 +356,7 @@ def parseres_get_ports(parseres):
     # print ports
     in_ports = []
     out_ports = []
+    inout_ports = []
     # 1 make in and out port lists
     for port in ports:
         if port[2] == "in":
@@ -354,6 +365,11 @@ def parseres_get_ports(parseres):
         elif port[2] == "out":
             # print "out port"
             out_ports.append(port)
+        elif port[2] == "inout":
+            # print "out port"
+            in_ports.append(port)
+            out_ports.append(port)
+            inout_ports.append(port)
     # print in_ports
     # print out_ports
     return [in_ports, out_ports]
@@ -413,22 +429,22 @@ def write_hdl_graph_ext(hdlfile, parseres):
     
     # get port arrays
     (in_ports, out_ports) = parseres_get_ports(parseres)
-    #print "in_ports", in_ports
+    # print "in_ports", in_ports
 
     # (signals, instances, processes, assigments) \
     #           = parseres_get_sipa(parseres)
 
     arch_full = parseres_get_arch_full(parseres)
-    print "arch_full:", arch_full
+    # print "arch_full:", arch_full
 
     arch_body_elems = parseres_get_arch_body_elems(parseres)
     # print arch_body_elems
     instances = arch_body_elems_get_subarray(arch_body_elems, "instance")
     assignments = arch_body_elems_get_subarray(arch_body_elems, "assign")
     processes = arch_body_elems_get_subarray(arch_body_elems, "processes")
-    print "instances:", instances
-    print "assignments:", assignments
-    print "processes:", processes
+    # print "instances:", instances
+    # print "assignments:", assignments
+    # print "processes:", processes
 
     # for elem in arch_body_elems:
     #     print "arch_body_elem:", elem
@@ -487,7 +503,7 @@ def write_hdl_graph_ext(hdlfile, parseres):
         assign_left.append(assign[0])
         assign_right.append(assign[2])
         i = i + 1
-    print "assign_s", assignments_s, assign_left, assign_right
+    # print "assign_s", assignments_s, assign_left, assign_right
         
     # components
     in_port_names = []
@@ -496,7 +512,7 @@ def write_hdl_graph_ext(hdlfile, parseres):
     out_port_names = []
     for out_port in out_ports:
         out_port_names.append(out_port[0])
-    print "i/o_port_names:", in_port_names, out_port_names
+    # print "i/o_port_names:", in_port_names, out_port_names
 
     inst_in_port_spec_a = []
     inst_out_port_spec_a = []
@@ -505,7 +521,16 @@ def write_hdl_graph_ext(hdlfile, parseres):
         inst_in_port_spec_local = []
         inst_out_port_spec_local = []
         # get data from parse results
-        inst_ports = inst[6].split(",\n")
+        if inst[3] == "port":
+            # print "no generics!"
+            inst_ports = inst[6].split(",\n")
+        elif inst[8] == "port":
+            # print "with generics!"
+            inst_ports = inst[11].split(",\n")
+        else:
+            # print "no PORTS!"
+            continue
+        # print inst
         # print "inst_ports", inst_ports
         for inst_port in inst_ports:
             inst_port_spec = inst_port.split("=>")
@@ -513,6 +538,9 @@ def write_hdl_graph_ext(hdlfile, parseres):
             inst_out_port_spec = []
             try:
                 inst_port_spec_clean = re.sub("( |,|\n)", "", inst_port_spec[1])
+                # print "inst_port_spec_clean:", inst_port_spec_clean
+                # print "in_port_names:", in_port_names
+                # print "out_port_names:", out_port_names
                 try:
                     # print in_port_names, inst_port_spec_clean
                     # check input ports
@@ -547,7 +575,7 @@ def write_hdl_graph_ext(hdlfile, parseres):
                         if idx >= 0:
                             inst_out_port_spec.append(inst_port_spec[0])
                             inst_out_port_spec.append(inst_port_spec_clean)
-                            inst_out_port_spec.append("xsig_" + str(idx+1) + "_blk")
+                            inst_out_port_spec.append("sig_" + str(idx+1) + "_blk")
                             inst_out_port_spec_local.append(inst_out_port_spec)
                             continue
                     except:
@@ -587,13 +615,13 @@ def write_hdl_graph_ext(hdlfile, parseres):
     inst_s = ""
     inst_ports_s = ""
     for inst in instances:
-        s = Template("\\node(inst_${num}) [comp_inst] at(0, ${vpos}) {Comp inst ${num}};\n\
+        s = Template("\\node(inst_${num}) [comp_inst] at(0, ${vpos}) {Inst ${inst_name} ${num}};\n\
 \matrix(in_ports) []\n\
 	at (0,${vpos_mat})\n\
 {\n\
   ${instance_ports_s}\
 };\n")
-
+        # print "inst:", inst
         # print "inst_in_ports", inst_in_port_spec_a[i]
         # print "inst_out_ports", inst_out_port_spec_a[i]
         j = 0
@@ -607,7 +635,8 @@ def write_hdl_graph_ext(hdlfile, parseres):
             else:
                 in_port_line = " & "
 
-            if j < len(inst_out_port_spec_a[i]):
+            # print "inst_out_port_spec_a", i, j, len(inst_out_port_spec_a[i]), inst_out_port_spec_a[i][j]
+            if j < len(inst_out_port_spec_a[i]) and len(inst_out_port_spec_a[i][j]) > 0:
                 out_port_name = re.sub("_", "\_", inst_out_port_spec_a[i][j][0])
                 out_port_line = "\\node(inst%d_out_%d_blk) [if_out] {%s}; \\\\\n" % (i+1, j+1, out_port_name)
             else:
@@ -630,6 +659,7 @@ def write_hdl_graph_ext(hdlfile, parseres):
         vpos = i * -2.5
         t_dict = {
             "num": i+1,
+            "inst_name": clean_underscore(inst[0]),
             "vpos": vpos,
             "vpos_mat": -1 + vpos,
             "instance_ports_s": inst_ports_s
@@ -686,7 +716,7 @@ def write_hdl_graph_ext(hdlfile, parseres):
         # print "iips_a", iips_a
         i = i + 1
 
-    print out_ports
+    # print out_ports
     i = 0
     s = Template("\draw[->] (sig_${assign_num}_blk.east)  .. controls +(0.5,0.) and +(-0.5,-0.) .. (out_${out_num}_blk.west);\n")
     for assign in assignments:
@@ -694,7 +724,7 @@ def write_hdl_graph_ext(hdlfile, parseres):
         for out_port in out_ports:
             # if in_ports
             if assign[0] == out_port[0]:
-                print "assign",assign[0], out_port[0]
+                # print "assign",assign[0], out_port[0]
                 t_dict = {
                     "assign_num": i + 1,
                     "out_num": j + 1
@@ -707,10 +737,14 @@ def write_hdl_graph_ext(hdlfile, parseres):
 
     template_dict = {
         "entity": re.sub("_", "\_", parseres.get("ENT_NAME")),
+        "entity_x": -3.4,
+        "entity_y": 5,
         "in_port_s": in_port_s.strip(),
         "in_port_cons": in_port_cons.strip(),
+        "in_ports_x": -16, #-3,
         "out_port_s": out_port_s.strip(),
         "out_port_cons": out_port_cons.strip(),
+        "out_ports_x": 14, # 4,
         "assignments_s": assignments_s,
         "instances_s": inst_s,
         "conn_from_in": conn_from_in,

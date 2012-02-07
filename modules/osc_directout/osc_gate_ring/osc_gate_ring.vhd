@@ -65,8 +65,10 @@ begin
       IOSTANDARD => "DEFAULT",
       SLEW => "SLOW")
     port map (
-      O => o_osz_drct,     -- Buffer output (connect directly to top-level port)
-      I => delayline_output      -- Buffer input 
+      O => o_osz_drct,
+      I => delayline_output
       );
+     -- Buffer output (connect directly to top-level port)
+      -- Buffer input
   
 end Behavioral;

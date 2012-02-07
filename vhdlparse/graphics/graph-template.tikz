@@ -17,12 +17,12 @@
 	if_in/.style = {
 	    draw,
 	    minimum height=12pt,
-	    minimum width=30pt,
+	    minimum width=8cm,
 	    font=\scriptsize},
 	if_out/.style = {
 	    draw,
 	    minimum height=12pt,
-	    minimum width=30pt,
+	    minimum width=8cm,
 	    font=\scriptsize},
 	>=open triangle 60,
   entity-frame/.style = {rounded corners=1pt}
