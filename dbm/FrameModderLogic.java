@@ -6,7 +6,8 @@
  * heavily inspired by the bitstreamTools.examples
  */
 
-package edu.byu.ece.rapidSmith.bitstreamTools.dprtests;
+// compile out of tree
+// package edu.byu.ece.rapidSmith.bitstreamTools.dprtests;
 
 import java.util.Iterator;
 import java.util.List;
