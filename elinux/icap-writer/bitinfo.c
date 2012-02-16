@@ -120,6 +120,7 @@ int main(int argc, char **argv)
 	printf("\n");
 	*/
 	i = fwrite(bitbuf, 1, bh.length, ICAP);
+	// write is way faster, it is used in bitinfo-timing.c
 	//i = write(ICAP, BITFILE, bh.length);
 	printf("wrote %d bytes to %s\n", i, devicap);
 
