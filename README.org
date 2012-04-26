@@ -4,9 +4,12 @@ rchw - Re-Configurable HardWare
 GPL where applicable
 
 A collection of different tools, scripts and documentation on
-reconfigurable hardware (FPGAs). As usual this is not meant as a
-canonical toolset. Rather most of the stuff in here is ad-hoc
+reconfigurable hardware (FPGAs) which was assembled or developed
+as part of my diploma thesis [fn:1]. As usual this is not meant as
+a canonical toolset. Rather most of the stuff in here is ad-hoc
 and provided as is.
+
+Repository: https://github.com/x75/rchw
 
 * Modules
 ** dbm
@@ -55,3 +58,6 @@ See the following items for more information
  - Tools for Open Reconfigurable Computing: http://torc-isi.sourceforge.net/
  - Reconfigure in the Open!: http://openpr-vt.sourceforge.net/OpenPR/OpenPR.html
  - http://www2.informatik.hu-berlin.de/~oberthol/html/Hardware.html
+
+* Footnotes
+[fn:1] Self-reconfiguring System-on-Chip using Linux on a Virtex-5 FPGA

@@ -2,29 +2,32 @@
                 ===============================
 
 Author: Oswald Berthold
-Date: 2012-02-16 17:10:51 CET
+Date: 2012-04-26 18:12:45 CEST
 
 
 2010, 2011, 2012 Oswald Berthold
 GPL where applicable
 
 A collection of different tools, scripts and documentation on
-reconfigurable hardware (FPGAs). As usual this is not meant as a
-canonical toolset. Rather most of the stuff in here is ad-hoc
+reconfigurable hardware (FPGAs) which was assembled or developed
+as part of my diploma thesis [1]. As usual this is not meant as
+a canonical toolset. Rather most of the stuff in here is ad-hoc
 and provided as is.
+
+Repository: [https://github.com/x75/rchw]
 
 Table of Contents
 =================
-1 Modules 
-    1.1 dbm 
-    1.2 elinux 
-        1.2.1 icap-writer 
-    1.3 ga-hw 
-    1.4 genmake 
-    1.5 modules 
-    1.6 util 
-    1.7 vhdlparse 
-2 Related 
+1 Modules
+    1.1 dbm
+    1.2 elinux
+        1.2.1 icap-writer
+    1.3 ga-hw
+    1.4 genmake
+    1.5 modules
+    1.6 util
+    1.7 vhdlparse
+2 Related
 
 
 1 Modules 
@@ -85,4 +88,10 @@ See the following items for more information
  - Tools for Open Reconfigurable Computing: [http://torc-isi.sourceforge.net/]
  - Reconfigure in the Open!: [http://openpr-vt.sourceforge.net/OpenPR/OpenPR.html]
  - [http://www2.informatik.hu-berlin.de/~oberthol/html/Hardware.html]
+
+
+[1] Self-reconfiguring System-on-Chip using Linux on a Virtex-5 FPGA
+
+
+[https://en.wikipedia.org/wiki/Reconfigurable\_computing]: https://en.wikipedia.org/wiki/Reconfigurable_computing
 
